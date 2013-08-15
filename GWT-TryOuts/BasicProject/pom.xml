@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
-	<!-- PROJECT ID -->
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+    <!-- PROJECT ID -->
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>GWT-TryOuts</artifactId>
 		<groupId>com.jvsd.gwt</groupId>
+		<artifactId>GWT-TryOuts</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>HelloWorld</artifactId>
+	<artifactId>BasicProject</artifactId>
 	<packaging>war</packaging>
 
-    <!-- PROPERTIES -->
+	<!-- PROPERTIES -->
 	<properties>
 		<!-- Convenience property to set the GWT version -->
 		<gwtVersion>2.5.1</gwtVersion>
@@ -22,7 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-    <!-- BUILD -->
+	<!-- BUILD -->
 	<build>
 		<!-- Generate compiled stuff in the folder used for developing mode -->
 		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
@@ -44,7 +43,7 @@
 				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
 					documentation at codehaus.org -->
 				<configuration>
-					<runTarget>HelloWorld.html</runTarget>
+					<runTarget>BasicProject.html</runTarget>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 				</configuration>
 			</plugin>
@@ -74,20 +73,20 @@
 		</plugins>
 	</build>
 
-    <!-- DEPENDENCIES -->
-    <dependencies>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-servlet</artifactId>
-            <version>${gwtVersion}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwtVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+	<!-- DEPENDENCIES -->
+	<dependencies>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 </project>

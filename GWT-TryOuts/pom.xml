@@ -20,6 +20,7 @@
 	<!-- MODULES -->
     <modules>
         <module>HelloWorld</module>
+        <module>BasicProject</module>
     </modules>
 
 	<!-- BUILD -->
