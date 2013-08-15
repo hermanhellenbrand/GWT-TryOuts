@@ -9,6 +9,6 @@ public class GWT {
     private static final Logger log = LoggerFactory.getLogger(GWT.class);
     
     public static void main(String[] args) {
-        log.info("GWT Stub");
+        log.info("GWT-TryOuts Parent Module");
     }
 }
