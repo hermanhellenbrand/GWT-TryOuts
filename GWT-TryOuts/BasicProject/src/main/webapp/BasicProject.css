@@ -1,6 +1,6 @@
-.gwt-TabLayoutPanel {
-	width: 90%;
-	margin: 15px;
+.gwt-TabLayoutPanel{
+   width: 90%;
+   margin: 15px;
 }
 
 H1 {
@@ -14,37 +14,38 @@ H1 {
 	width: 100%;
 }
 
-.htmlPanel {
-	background-color: lightgray;
+.htmlPanel{
+	background-color : lightgray;
 }
 
-.gwt-Image {
-	width: 80%;
-	height: 60px;
-	margin: 25px;
-	border: 1px black solid;
+.gwt-Image{
+   width: 80%;
+   height: 60px;
+   margin: 25px;
+   border: 1px black solid;
 }
 
-#search {
-	margin-left: 15px;
+#search{
+   margin-left: 15px;
 }
 
-.feedback {
-	color: white;
-	height: 250px;
-	position: absolute;
-	top: 35%;
-	right: 0%;
+
+.feedback{
+   color: white;
+   height: 250px;
+   position: absolute;
+   top: 35%;
+   right: 0%;
 }
 
-.normal {
-	background: darkgreen;
-	width: 40px;
+.normal{
+   background: darkgreen;
+   width: 40px;
 }
 
-.active {
-	background: lightgreen;
-	width: 70px;
-	cursor: pointer;
-	cursor: hand;
+.active{
+   background: lightgreen;
+   width: 70px;
+   cursor: pointer;
+   cursor: hand;
 }
