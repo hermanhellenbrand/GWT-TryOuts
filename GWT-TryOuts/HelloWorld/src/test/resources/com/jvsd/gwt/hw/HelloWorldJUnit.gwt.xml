@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='com.jvsd.gwt.hw.HelloWorld' />
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/HelloWorld/greet" class="com.jvsd.gwt.hw.server.GreetingServiceImpl" />
+
+</module>
