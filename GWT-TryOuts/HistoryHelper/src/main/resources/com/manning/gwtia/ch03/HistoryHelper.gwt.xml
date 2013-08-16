@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module rename-to="HistoryHelper">
+
+    <inherits name="com.google.gwt.user.User" />
+    <source path="client" />
+    <inherits name='com.google.gwt.user.theme.standard.Standard' />
+    <entry-point class="com.manning.gwtia.ch03.client.HistoryHelper" />
+
+</module>

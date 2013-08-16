@@ -1,0 +1,183 @@
+- create new standard maven module 
+	* Choolse for Create simple project
+	* Optionall delete test source path
+
+- Add library GWT SDK
+	* goto project Properties | Java Build Path | Libraries
+	* choose add Library
+	* select Google Web Toolkit and push next button
+	* choose Use Default SKD and push finish button
+	* push OK button
+
+- change the pom.xml
+	* add the following entries
+		
+		<!-- PROPERTIES -->
+		<properties>
+			<!-- Convenience property to set the GWT version -->
+			<gwtVersion>2.5.1</gwtVersion>
+			<!-- GWT needs at least java 1.5 -->
+			<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		</properties>
+
+		<!-- BUILD -->
+		<build>
+			<!-- Generate compiled stuff in the folder used for developing mode -->
+			<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+			<plugins>
+				<!-- GWT Maven Plugin -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>gwt-maven-plugin</artifactId>
+					<version>2.5.1</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+								<goal>test</goal>
+								<goal>generateAsync</goal>
+							</goals>
+						</execution>
+					</executions>
+					<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
+						documentation at codehaus.org -->
+					<configuration>
+						<runTarget>Module.html</runTarget>
+						<hostedWebapp>${webappDirectory}</hostedWebapp>
+					</configuration>
+				</plugin>
+				<!-- Copy static web files before executing gwt:run -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1.1</version>
+					<executions>
+						<execution>
+							<phase>compile</phase>
+						</execution>
+					</executions>
+					<configuration>
+						<webappDirectory>${webappDirectory}</webappDirectory>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</build>
+
+		<!-- DEPENDENCIES -->
+		<dependencies>
+			<dependency>
+				<groupId>com.google.gwt</groupId>
+				<artifactId>gwt-servlet</artifactId>
+				<version>${gwtVersion}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.google.gwt</groupId>
+				<artifactId>gwt-user</artifactId>
+				<version>${gwtVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+			
+	* replace the entry <runTarget>Module.html</runTarget> with the name of the name of the the module, eg: BasicProject.html
+	* update maven project
+
+- create webapp
+	* In the src/main/webapp dir create the runTarget html file, eg: BasicProject.html
+	* create WEB-INF and WEB-INF/deploy directory
+	* create web.xml file (in WEB-INF dir) with (minimal) the following content:
+	
+		<?xml version="1.0" encoding="utf-8"?>
+
+		<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+			xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+			version="2.5">
+			
+			<!-- Default page to serve -->
+			<welcome-file-list>
+				<welcome-file>BasicProject.html</welcome-file>
+			</welcome-file-list>
+	
+		</web-app>
+	
+	* create BasicProject.html (in src/main/webapp dir) with the (mimimal) content:
+	
+		<!doctype html>
+		<html>
+			<head>
+				<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+				<link type="text/css" rel="stylesheet" href="HelloWorld.css">
+				<title>Wrapper HTML for BasicProject</title>
+				<script language="javascript" src="BasicProject/BasicProject.nocache.js"></script>
+			</head>
+		  <body>
+				Hello BasicProject!
+		  </body>
+		</html>
+	
+- create package base package (eg com.manning.gwtia.ch03) in src/main/resource	
+	* create file BasicProject.gwt.xml with the (mimimal) content:
+		
+		<?xml version="1.0" encoding="UTF-8"?>
+
+		<module rename-to="HistoryHelper">
+
+			<inherits name="com.google.gwt.user.User" />
+			<source path="client" />
+			<inherits name='com.google.gwt.user.theme.standard.Standard' />
+			<entry-point class="com.manning.gwtia.ch03.client.HistoryHelper" />
+
+		</module>
+		
+- create class BasicProject in the package com.manning.gwtia.ch03 with the minimal code lines:
+
+	package com.manning.gwtia.ch03.client;
+
+	import java.util.Date;
+
+	import com.google.gwt.core.client.EntryPoint;
+	import com.google.gwt.user.client.ui.Label;
+	import com.google.gwt.user.client.ui.RootPanel;
+
+	public class HistoryHelper implements EntryPoint {
+
+		@Override
+		public void onModuleLoad(){
+			Label theGreeting = new Label("Started HistoryHelper on " + new Date());
+			RootPanel.get().add(theGreeting);
+		}
+	}
+
+- run the module as Web Application (Project | Run As | Web Application)
+	* this wil fail, because we miss some stettings
+	* open the Run | Run configuration window and select the Web application | BasicProject.html entry
+	* in the Main tab check if the field Main class has the following value: com.google.gwt.dev.DevMode
+	* in the Arguments tab check all of the following parameters are listed:
+	
+		-war C:\hhProjects\Kepler\GWT-TryOuts\GWT-TryOuts\BasicProject\target\BasicProject-0.0.1-SNAPSHOT 
+		-remoteUI "${gwt_remote_ui_server_port}:${unique_id}" 
+		-startupUrl BasicProject.html 
+		-logLevel INFO 
+		-codeServerPort 9997 
+		-port 8888 
+		com.manning.gwtia.ch03.BasicProject	
+		
+	* push Apply button and the Run button
+	* the application will be started
+	
+- the base of an GWT application is created now.	
+
+		
+	
+	
+	

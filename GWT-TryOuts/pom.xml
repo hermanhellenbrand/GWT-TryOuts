@@ -21,6 +21,7 @@
     <modules>
         <module>HelloWorld</module>
         <module>BasicProject</module>
+        <module>HistoryHelper</module>
     </modules>
 
 	<!-- BUILD -->
